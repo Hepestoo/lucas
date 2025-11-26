@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  lucas:
+    image: ghcr.io/hepestoo/lucas:1.0.5
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.lucas.entrypoints=http"
+        - "traefik.http.routers.lucas.rule=Host(`lucas.byronrm.com`)"
+        - "traefik.http.middlewares.lucas-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.lucas.middlewares=lucas-https-redirect"
+        - "traefik.http.routers.lucas-secure.entrypoints=https"
+        - "traefik.http.routers.lucas-secure.rule=Host(`lucas.byronrm.com`)"
+        - "traefik.http.routers.lucas-secure.tls=true"
+        - "traefik.http.routers.lucas-secure.tls.certresolver=http"
+        - "traefik.http.routers.lucas-secure.service=lucas"
+        - "traefik.http.services.lucas.loadbalancer.server.port=5000"
+        - "traefik.docker.network=traefik-public"
+    networks:
+      - traefik-public
+
+networks:
+  traefik-public:
+    external: true
