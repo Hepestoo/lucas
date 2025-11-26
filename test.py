@@ -6,7 +6,7 @@ def test_home():
     client = app.test_client()
     res = client.get("/")
     assert res.status_code == 200
-    assert b"Analizador Lucas" in res.data
+    assert b"Examen" in res.data
     assert b"1.0.5" in res.data
     assert b"textarea" in res.data
 
