@@ -77,7 +77,7 @@ HTML_HOME = """
 <body>
 
 <div class="card">
-    <h1>Analizador Lucas</h1>
+    <h1>Examen</h1>
     <span class="version">Versión 1.0.5</span>
 
     <!-- Formulario Simple -->
